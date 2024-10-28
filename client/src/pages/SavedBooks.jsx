@@ -14,7 +14,6 @@ import { GET_ME } from "../utils/queries";
 import { REMOVE_BOOK } from "../utils/mutations";
 import { useQuery } from '@apollo/client';
 
-
 const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
   let userData = data?.me || {};
@@ -34,8 +33,7 @@ const SavedBooks = () => {
           return false;
         }
 
-        const [getUser] = useQuery(GET_ME);
-        const response = await getUser(token);
+        const { data } = await getUser(token);
 
         if (!response.ok) {
           throw new Error('something went wrong!');
