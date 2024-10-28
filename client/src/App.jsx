@@ -1,5 +1,4 @@
 import './App.css';
-import { Outlet } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,6 +6,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { Outlet } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 
@@ -36,14 +36,12 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-          <Navbar/>
-          <Switch>
-            <Route exact path="/" component={SearchBooks}/>
-            <Route exact path="/saved" component={SavedBooks}/>
-            <Route render={() => <h1 className="display-2">Wrong Page!</h1>}/>
-          </Switch>
-      </Router>
+      <div className="flex-column justify-flex-start min-100-vh">
+        <Navbar />
+        <div className="container">
+          <Outlet/>
+        </div>
+      </div>
     </ApolloProvider>
   );
 }
